@@ -1,0 +1,151 @@
+{
+    "app": {
+        "title": "HalalFin",
+        "nav": {
+            "home": "Home",
+            "financing": "Financing",
+            "invest": "Invest",
+            "zakat": "Zakat",
+            "audit": "Audit",
+            "profile": "Profile",
+            "dashboard": "Dashboard"
+        },
+        "footer": "© 2026 HalalFin. Shariah Compliant."
+    },
+    "home": {
+        "hero": {
+            "title": "Halal Financial Operating System",
+            "subtitle": "Your trusted platform for Shariah-compliant financing, investing, and Zakat management.",
+            "get_started": "Get Started",
+            "learn_more": "Learn More"
+        }
+    },
+    "financing": {
+        "title": "Halal Financing Solutions",
+        "subtitle": "Compare offers from top Islamic banks in seconds.",
+        "calculator": {
+            "title": "Calculator Inputs",
+            "description": "Adjust values to see offers.",
+            "asset_value": "Asset Value (SAR)",
+            "down_payment": "Down Payment (SAR)",
+            "duration": "Duration (Months)"
+        },
+        "comparison": {
+            "title": "Recommended Financing Offers",
+            "profit_rate": "Profit Rate",
+            "monthly": "Monthly",
+            "apply": "Apply Now"
+        }
+    },
+    "investments": {
+        "title": "Investment Dashboard",
+        "overview": "Overview",
+        "sukuk": "Sukuk Marketplace",
+        "funds": "Halal Funds",
+        "portfolio": {
+            "total_balance": "Total Balance",
+            "total_profit": "Total Profit",
+            "invested_assets": "Invested Assets",
+            "zakat_due": "Zakat Due",
+            "from_last_month": "from last month",
+            "annual_return": "annual return",
+            "types": "Sukuk, ETFs, Stocks",
+            "calculated_on": "Calculated on 2.5%"
+        },
+        "chart": {
+            "title": "Performance Overview",
+            "subtitle": "Your portfolio growth over the last 6 months."
+        },
+        "sukuk_marketplace": {
+            "title": "Sukuk Marketplace",
+            "view_all": "View All",
+            "low_risk": "Low Risk",
+            "medium_risk": "Medium Risk",
+            "rating": "Rating",
+            "duration": "Duration",
+            "min_investment": "Min Investment",
+            "invest_now": "Invest Now",
+            "yield": "Yield"
+        },
+        "coming_soon": "Halal Mutual Funds & ETFs Module (Coming Soon)"
+    },
+    "zakat": {
+        "title": "Zakat & Charity",
+        "subtitle": "Purify your wealth with our automated Zakat tools.",
+        "calculator": {
+            "title": "Zakat Calculator",
+            "description": "Calculate your Zakat based on your eligible assets.",
+            "cash": "Cash on Hand / Bank (SAR)",
+            "gold": "Gold & Jewelry (SAR Value)",
+            "silver": "Silver (SAR Value)",
+            "stocks": "Stocks & Investments (SAR)",
+            "debts": "Short-term Debts (Deductible)",
+            "total_due": "Total Zakat Due (2.5%)",
+            "net_assets": "Total Net Assets",
+            "pay_now": "Pay Zakat Now"
+        },
+        "history": {
+            "title": "Recent Charity Transactions",
+            "header": "History",
+            "zakat_payment": "Zakat Payment",
+            "sadaqah": "Sadaqah",
+            "orphan": "Orphan Sponsorship",
+            "verified": "Verified"
+        }
+    },
+    "audit": {
+        "title": "Shariah Governance & Audit",
+        "subtitle": "Advanced AI-powered compliance tools and immutable audit logs.",
+        "checker": {
+            "title": "AI Shariah Screener",
+            "description": "Analyze any stock or company for Shariah compliance instantly.",
+            "placeholder": "Enter Stock Symbol (e.g. 2222.SR)",
+            "analyze": "Analyze",
+            "compliance_score": "Compliance Score",
+            "compliant": "Compliant",
+            "non_compliant": "Non-Compliant",
+            "doubtful": "Doubtful"
+        },
+        "logs": {
+            "title": "Immutable Audit Logs",
+            "caption": "A list of recent auditable actions on the platform.",
+            "action": "Action",
+            "entity": "Entity",
+            "user": "User / System",
+            "timestamp": "Timestamp"
+        }
+    },
+    "profile": {
+        "title": "User Profile",
+        "personal_info": "Personal Information",
+        "full_name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "nationality": "Nationality",
+        "risk_profile": "Risk Profile",
+        "edit": "Edit Profile",
+        "save": "Save Changes",
+        "loading": "Loading..."
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "welcome": "Welcome back",
+        "overview": "Quick Overview",
+        "recent_activity": "Recent Activity",
+        "quick_actions": "Quick Actions"
+    },
+    "auth": {
+        "login": "Login",
+        "register": "Register",
+        "email": "Email",
+        "password": "Password",
+        "full_name": "Full Name",
+        "confirm_password": "Confirm Password",
+        "login_button": "Login",
+        "register_button": "Register",
+        "no_account": "Don't have an account?",
+        "have_account": "Already have an account?",
+        "sign_up": "Sign up",
+        "sign_in": "Sign in"
+    }
+}
