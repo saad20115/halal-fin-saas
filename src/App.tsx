@@ -9,6 +9,7 @@ import InvestmentsPage from "@/pages/Investments";
 import ZakatPage from "@/pages/Zakat";
 import AuditPage from "@/pages/Audit";
 import DashboardPage from "@/pages/Dashboard";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
 function App() {
   return (
@@ -18,8 +19,22 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="financing" element={<FinancingPage />} />
           <Route path="invest" element={<InvestmentsPage />} />
           <Route path="zakat" element={<ZakatPage />} />

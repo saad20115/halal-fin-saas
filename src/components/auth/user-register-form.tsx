@@ -1,149 +1,121 @@
-import * as React from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { supabase } from "@/lib/supabase"
-import { useNavigate } from "react-router-dom"
-import { Loader2 } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useAuth } from "@/contexts/AuthContext"
+import { useTranslation } from "react-i18next"
 
-const formSchema = z.object({
-    fullName: z.string().min(2, { message: "Name must be at least 2 characters" }),
-    email: z.string().email({ message: "Invalid email address" }),
-    password: z.string().min(6, { message: "Password must be at least 6 characters" }),
-    confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-})
-
-interface UserRegisterFormProps extends React.HTMLAttributes<HTMLDivElement> { }
-
-export function UserRegisterForm({ className, ...props }: UserRegisterFormProps) {
-    const [isLoading, setIsLoading] = React.useState<boolean>(false)
+export function UserRegisterForm() {
+    const { t } = useTranslation()
     const navigate = useNavigate()
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-    })
+    const { signUp } = useAuth()
 
-    async function onSubmit(data: z.infer<typeof formSchema>) {
-        setIsLoading(true)
+    const [fullName, setFullName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
-        try {
-            const { error } = await supabase.auth.signUp({
-                email: data.email,
-                password: data.password,
-                options: {
-                    data: {
-                        full_name: data.fullName,
-                    },
-                },
-            })
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setError("")
 
-            if (error) {
-                console.error(error)
-                alert(error.message)
-            } else {
-                alert("Registration successful! Please check your email.")
-                navigate("/login")
-            }
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setIsLoading(false)
+        // Validation
+        if (password !== confirmPassword) {
+            setError("Passwords do not match")
+            return
+        }
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters")
+            return
+        }
+
+        setLoading(true)
+
+        const { error } = await signUp(email, password, fullName)
+
+        if (error) {
+            setError(error.message)
+            setLoading(false)
+        } else {
+            // Redirect to dashboard after successful registration
+            navigate("/dashboard", { replace: true })
         }
     }
 
     return (
-        <div className={cn("grid gap-6", className)} {...props}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid gap-2">
-                    <div className="grid gap-1">
-                        <Label className="sr-only" htmlFor="fullName">
-                            Full Name
-                        </Label>
+        <Card className="w-full">
+            <CardHeader>
+                <CardTitle>{t('auth.register')}</CardTitle>
+                <CardDescription>
+                    Create your Halal Finance account
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    {error && (
+                        <div className="rounded-md bg-red-50 p-3 text-sm text-red-800">
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="space-y-2">
+                        <Label htmlFor="fullName">{t('auth.full_name')}</Label>
                         <Input
                             id="fullName"
-                            placeholder="Full Name"
                             type="text"
-                            autoCapitalize="words"
-                            autoCorrect="off"
-                            disabled={isLoading}
-                            {...register("fullName")}
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            required
+                            disabled={loading}
                         />
-                        {errors.fullName && (
-                            <p className="text-sm text-red-500">{errors.fullName.message}</p>
-                        )}
                     </div>
-                    <div className="grid gap-1">
-                        <Label className="sr-only" htmlFor="email">
-                            Email
-                        </Label>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="email">{t('auth.email')}</Label>
                         <Input
                             id="email"
-                            placeholder="name@example.com"
                             type="email"
-                            autoCapitalize="none"
-                            autoComplete="email"
-                            autoCorrect="off"
-                            disabled={isLoading}
-                            {...register("email")}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            disabled={loading}
                         />
-                        {errors.email && (
-                            <p className="text-sm text-red-500">{errors.email.message}</p>
-                        )}
                     </div>
-                    <div className="grid gap-1">
-                        <Label className="sr-only" htmlFor="password">
-                            Password
-                        </Label>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="password">{t('auth.password')}</Label>
                         <Input
                             id="password"
-                            placeholder="Password"
                             type="password"
-                            autoCapitalize="none"
-                            autoComplete="new-password"
-                            autoCorrect="off"
-                            disabled={isLoading}
-                            {...register("password")}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            disabled={loading}
                         />
-                        {errors.password && (
-                            <p className="text-sm text-red-500">{errors.password.message}</p>
-                        )}
                     </div>
-                    <div className="grid gap-1">
-                        <Label className="sr-only" htmlFor="confirmPassword">
-                            Confirm Password
-                        </Label>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="confirmPassword">{t('auth.confirm_password')}</Label>
                         <Input
                             id="confirmPassword"
-                            placeholder="Confirm Password"
                             type="password"
-                            autoCapitalize="none"
-                            autoComplete="new-password"
-                            autoCorrect="off"
-                            disabled={isLoading}
-                            {...register("confirmPassword")}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            disabled={loading}
                         />
-                        {errors.confirmPassword && (
-                            <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
-                        )}
                     </div>
-                    <Button disabled={isLoading}>
-                        {isLoading && (
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        )}
-                        Sign Up
+
+                    <Button type="submit" className="w-full" disabled={loading}>
+                        {loading ? "Creating account..." : t('auth.register_button')}
                     </Button>
-                </div>
-            </form>
-        </div>
+                </form>
+            </CardContent>
+        </Card>
     )
 }
