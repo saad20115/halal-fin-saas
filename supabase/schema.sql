@@ -154,3 +154,26 @@ create policy "Users see own portfolios" on public.investment_portfolios
 -- Users can Create portfolios
 create policy "Users create portfolios" on public.investment_portfolios
   for insert with check (auth.uid() = user_id);
+
+-- Audit Logs Policies
+create policy "Enable read access for all users" on public.audit_logs
+  for select using (true);
+
+-- Notifications
+create table public.notifications (
+  id uuid default uuid_generate_v4() primary key,
+  user_id uuid references public.user_profiles(id),
+  title text not null,
+  message text not null,
+  is_read boolean default false,
+  type text check (type in ('info', 'success', 'warning', 'error')) default 'info',
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.notifications enable row level security;
+
+create policy "Users can see own notifications" on public.notifications
+  for select using (auth.uid() = user_id);
+
+create policy "Users can update own notifications" on public.notifications
+  for update using (auth.uid() = user_id);
