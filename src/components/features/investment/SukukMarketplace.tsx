@@ -1,38 +1,63 @@
+import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { supabase } from "@/lib/supabase"
+import { Skeleton } from "@/components/ui/skeleton"
 
-const SUKUK_LIST = [
-    {
-        id: 1,
-        issuer: "Saudi Aramco",
-        rating: "A+",
-        yield: "4.5%",
-        duration: "5 Years",
-        minInvest: 1000,
-        risk: "Low",
-    },
-    {
-        id: 2,
-        issuer: "Al Rajhi Capital",
-        rating: "AA",
-        yield: "3.8%",
-        duration: "3 Years",
-        minInvest: 500,
-        risk: "Very Low",
-    },
-    {
-        id: 3,
-        issuer: "Green Energy Sukuk",
-        rating: "BBB",
-        yield: "6.2%",
-        duration: "7 Years",
-        minInvest: 5000,
-        risk: "Medium",
-    },
-]
+interface SukukProduct {
+    id: string
+    issuer: string
+    name: string
+    sukuk_rating: string
+    annual_yield: number
+    duration_months: number
+    min_investment: number
+    risk_level: 'low' | 'medium' | 'high'
+}
 
 export function SukukMarketplace() {
+    const [products, setProducts] = useState<SukukProduct[]>([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+    const fetchProducts = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('sukuk_products')
+                .select('*')
+                .eq('is_active', true)
+
+            if (error) throw error
+            setProducts(data || [])
+        } catch (error) {
+            console.error('Error fetching sukuk products:', error)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    if (loading) {
+        return (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {[1, 2, 3].map((i) => (
+                    <Card key={i}>
+                        <CardHeader>
+                            <Skeleton className="h-4 w-1/3 mb-2" />
+                            <Skeleton className="h-6 w-2/3" />
+                        </CardHeader>
+                        <CardContent>
+                            <Skeleton className="h-24 w-full" />
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
+        )
+    }
+
     return (
         <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -40,27 +65,30 @@ export function SukukMarketplace() {
                 <Button variant="outline">View All</Button>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {SUKUK_LIST.map((sukuk) => (
-                    <Card key={sukuk.id}>
+                {products.map((sukuk) => (
+                    <Card key={sukuk.id} className="flex flex-col">
                         <CardHeader>
-                            <div className="flex justify-between">
-                                <Badge variant={sukuk.risk === 'Low' || sukuk.risk === 'Very Low' ? 'default' : 'secondary'}>
-                                    {sukuk.risk} Risk
+                            <div className="flex justify-between items-start">
+                                <Badge variant={sukuk.risk_level === 'low' ? 'default' : 'secondary'}>
+                                    {sukuk.risk_level.charAt(0).toUpperCase() + sukuk.risk_level.slice(1)} Risk
                                 </Badge>
-                                <span className="font-bold text-primary">{sukuk.yield} Yield</span>
+                                <span className="font-bold text-primary">{sukuk.annual_yield}% Yield</span>
                             </div>
-                            <CardTitle className="mt-2">{sukuk.issuer}</CardTitle>
-                            <CardDescription>Rating: {sukuk.rating}</CardDescription>
+                            <CardTitle className="mt-2 text-lg">{sukuk.issuer}</CardTitle>
+                            <CardDescription className="line-clamp-1">{sukuk.name}</CardDescription>
+                            <div className="text-xs font-medium bg-muted inline-block px-2 py-1 rounded">
+                                Rating: {sukuk.sukuk_rating}
+                            </div>
                         </CardHeader>
-                        <CardContent>
-                            <div className="space-y-1 text-sm">
-                                <div className="flex justify-between">
+                        <CardContent className="flex-1">
+                            <div className="space-y-2 text-sm">
+                                <div className="flex justify-between border-b pb-2">
                                     <span className="text-muted-foreground">Duration</span>
-                                    <span>{sukuk.duration}</span>
+                                    <span className="font-medium">{sukuk.duration_months} Months</span>
                                 </div>
-                                <div className="flex justify-between">
+                                <div className="flex justify-between border-b pb-2">
                                     <span className="text-muted-foreground">Min Investment</span>
-                                    <span>{sukuk.minInvest} SAR</span>
+                                    <span className="font-medium">{sukuk.min_investment.toLocaleString()} SAR</span>
                                 </div>
                             </div>
                         </CardContent>
