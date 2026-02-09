@@ -86,7 +86,7 @@ create table public.zakat_records (
   id uuid default uuid_generate_v4() primary key,
   user_id uuid references public.user_profiles(id),
   zakat_year integer not null,
-  assets_type text check (assets_type in ('cash', 'gold', 'silver', 'stocks', 'business')),
+  assets_type text check (assets_type in ('cash', 'gold', 'silver', 'stocks', 'business', 'mixed')),
   amount numeric not null, -- Zakat amount due
   paid_amount numeric default 0,
   status text check (status in ('pending', 'paid', 'partial')) default 'pending',

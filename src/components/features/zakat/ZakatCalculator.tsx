@@ -1,13 +1,16 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
-import { useEffect } from "react"
+import { useAuth } from "@/contexts/AuthContext"
+import { supabase } from "@/lib/supabase"
+import { CheckCircle2, Save } from "lucide-react"
 
 export function ZakatCalculator() {
     const { t } = useTranslation()
+    const { user } = useAuth()
     const [cash, setCash] = useState<number>(0)
     const [gold, setGold] = useState<number>(0)
     const [silver, setSilver] = useState<number>(0)
@@ -16,14 +19,43 @@ export function ZakatCalculator() {
 
     const [totalAssets, setTotalAssets] = useState<number>(0)
     const [zakatDue, setZakatDue] = useState<number>(0)
+    const [loading, setLoading] = useState(false)
+    const [saved, setSaved] = useState(false)
 
     useEffect(() => {
         const total = cash + gold + silver + stocks - debts
+        // Nisab threshold approx (85g gold * 250 SAR/g)
         const due = total > 85 * 250 ? total * 0.025 : 0
 
         setTotalAssets(Math.max(0, total))
         setZakatDue(Math.max(0, due))
     }, [cash, gold, silver, stocks, debts])
+
+    const handleSave = async () => {
+        if (!user || zakatDue <= 0) return
+
+        setLoading(true)
+        try {
+            const { error } = await supabase.from('zakat_records').insert([
+                {
+                    user_id: user.id,
+                    zakat_year: new Date().getFullYear(), // Hijri year would be better but using Gregorian for now
+                    assets_type: 'mixed',
+                    amount: zakatDue,
+                    status: 'pending'
+                }
+            ])
+
+            if (error) throw error
+
+            setSaved(true)
+            setTimeout(() => setSaved(false), 3000)
+        } catch (error) {
+            console.error('Error saving zakat record:', error)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     return (
         <Card className="w-full max-w-2xl">
@@ -87,7 +119,24 @@ export function ZakatCalculator() {
                         {t('zakat.calculator.net_assets')}: {totalAssets.toFixed(2)} SAR
                     </div>
                 </div>
-                <Button className="w-full">{t('zakat.calculator.pay_now')}</Button>
+
+                <Button
+                    className="w-full gap-2"
+                    onClick={handleSave}
+                    disabled={loading || zakatDue <= 0}
+                >
+                    {saved ? (
+                        <>
+                            <CheckCircle2 className="h-4 w-4" />
+                            Saved Successfully
+                        </>
+                    ) : (
+                        <>
+                            <Save className="h-4 w-4" />
+                            {t('zakat.calculator.save_record') || 'Save Record'}
+                        </>
+                    )}
+                </Button>
             </CardContent>
         </Card>
     )
