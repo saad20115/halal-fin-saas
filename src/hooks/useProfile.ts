@@ -45,9 +45,9 @@ export function useProfile() {
                         id: user.id,
                         email: user.email || '',
                         full_name: user.user_metadata?.full_name || '',
-                        phone: '',
-                        nationality: '',
-                        risk_profile: ''
+                        phone: null,
+                        nationality: null,
+                        risk_profile: null
                     }
 
                     const { data: createdProfile, error: createError } = await supabase
