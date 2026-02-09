@@ -31,7 +31,7 @@
             "subtitle": "Comprehensive tools designed to simplify your Islamic financial journey"
         },
         "features": {
-            " financing": {
+            "financing": {
                 "title": "Halal Financing",
                 "desc": "Compare and apply for Shariah-compliant financing from top Islamic banks"
             },
@@ -99,6 +99,11 @@
             "profit_rate": "Profit Rate",
             "monthly": "Monthly",
             "apply": "Apply Now"
+        },
+        "tabs": {
+            "calculator": "Calculator",
+            "apply": "Apply Now",
+            "history": "My Requests"
         }
     },
     "investments": {
@@ -210,6 +215,7 @@
         "no_account": "Don't have an account?",
         "have_account": "Already have an account?",
         "sign_up": "Sign up",
-        "sign_in": "Sign in"
+        "sign_in": "Sign in",
+        "back_to_home": "Back to Home"
     }
 }

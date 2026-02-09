@@ -100,7 +100,12 @@
             "monthly": "القسط الشهري",
             "apply": "قدم الآن"
         },
-        "request_form_title": "نموذج طلب التمويل"
+        "request_form_title": "نموذج طلب التمويل",
+        "tabs": {
+            "calculator": "الحاسبة",
+            "apply": "تقديم طلب",
+            "history": "طلباتي"
+        }
     },
     "investments": {
         "title": "لوحة الاستثمار",
@@ -205,6 +210,7 @@
         "confirm_password": "تأكيد كلمة المرور",
         "full_name": "الاسم الكامل",
         "login_button": "دخول",
-        "register_button": "تسجيل"
+        "register_button": "تسجيل",
+        "back_to_home": "العودة للرئيسية"
     }
 }

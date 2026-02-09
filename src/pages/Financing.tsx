@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { FinancingCalculator } from "@/components/features/financing/FinancingCalculator"
 import { ProductComparison } from "@/components/features/financing/ProductComparison"
+import { FinancingRequestForm } from "@/components/features/financing/FinancingRequestForm"
+import { FinancingHistory } from "@/components/features/financing/FinancingHistory"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useTranslation } from "react-i18next"
 
 export default function FinancingPage() {
@@ -20,21 +23,45 @@ export default function FinancingPage() {
                 </p>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-3">
-                <div className="lg:col-span-1">
-                    <FinancingCalculator
-                        assetValue={assetValue}
-                        setAssetValue={setAssetValue}
-                        downPayment={downPayment}
-                        setDownPayment={setDownPayment}
-                        duration={duration}
-                        setDuration={setDuration}
-                    />
+            <Tabs defaultValue="calculator" className="space-y-6">
+                <div className="flex justify-center">
+                    <TabsList className="grid w-full max-w-md grid-cols-3">
+                        <TabsTrigger value="calculator">{t('financing.tabs.calculator') || 'Calculator'}</TabsTrigger>
+                        <TabsTrigger value="apply">{t('financing.tabs.apply') || 'Apply Now'}</TabsTrigger>
+                        <TabsTrigger value="history">{t('financing.tabs.history') || 'My Requests'}</TabsTrigger>
+                    </TabsList>
                 </div>
-                <div className="lg:col-span-2">
-                    <ProductComparison amount={financingAmount} duration={duration} />
-                </div>
-            </div>
+
+                <TabsContent value="calculator" className="space-y-6">
+                    <div className="grid gap-8 lg:grid-cols-3">
+                        <div className="lg:col-span-1">
+                            <FinancingCalculator
+                                assetValue={assetValue}
+                                setAssetValue={setAssetValue}
+                                downPayment={downPayment}
+                                setDownPayment={setDownPayment}
+                                duration={duration}
+                                setDuration={setDuration}
+                            />
+                        </div>
+                        <div className="lg:col-span-2">
+                            <ProductComparison amount={financingAmount} duration={duration} />
+                        </div>
+                    </div>
+                </TabsContent>
+
+                <TabsContent value="apply">
+                    <div className="mx-auto max-w-2xl">
+                        <FinancingRequestForm />
+                    </div>
+                </TabsContent>
+
+                <TabsContent value="history">
+                    <div className="mx-auto max-w-4xl">
+                        <FinancingHistory />
+                    </div>
+                </TabsContent>
+            </Tabs>
         </div>
     )
 }

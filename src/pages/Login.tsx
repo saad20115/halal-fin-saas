@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
 import { UserLoginForm } from "@/components/auth/user-login-form"
 import { Button } from "@/components/ui/button"
+import { useTranslation } from "react-i18next"
 import { ArrowLeft } from "lucide-react"
 
 export default function LoginPage() {
+    const { t } = useTranslation()
     return (
         <div className="container relative h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
             <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
@@ -25,7 +27,7 @@ export default function LoginPage() {
                     <Link to="/">
                         <Button variant="ghost" size="sm" className="gap-2 mb-4">
                             <ArrowLeft className="h-4 w-4" />
-                            Back to Home
+                            {t('auth.back_to_home')}
                         </Button>
                     </Link>
                     <div className="flex flex-col space-y-2 text-center">
