@@ -35,10 +35,38 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="financing" element={<FinancingPage />} />
-          <Route path="invest" element={<InvestmentsPage />} />
-          <Route path="zakat" element={<ZakatPage />} />
-          <Route path="audit" element={<AuditPage />} />
+          <Route
+            path="financing"
+            element={
+              <ProtectedRoute>
+                <FinancingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="invest"
+            element={
+              <ProtectedRoute>
+                <InvestmentsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="zakat"
+            element={
+              <ProtectedRoute>
+                <ZakatPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="audit"
+            element={
+              <ProtectedRoute>
+                <AuditPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </Router>
