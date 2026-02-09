@@ -1,43 +1,44 @@
-import { useEffect, useState } from "react"
-import { supabase } from "@/lib/supabase"
+import { useState, useEffect } from 'react'
+import { supabase } from '@/lib/supabase'
+import { useAuth } from '@/contexts/AuthContext'
 
-export interface UserProfile {
-    id: string
-    full_name: string | null
-    email: string | null
-    phone: string | null
-    role: 'user' | 'premium_user' | 'bank_admin' | 'shariah_auditor' | 'investment_partner' | 'super_admin'
-    is_premium: boolean
-    nationality: string | null
-    risk_profile: 'low' | 'medium' | 'high' | null
+interface UserProfile {
+    user_id: string
+    email: string
+    full_name?: string
+    phone?: string
+    nationality?: string
+    risk_profile?: string
+    created_at?: string
+    updated_at?: string
 }
 
 export function useProfile() {
+    const { user } = useAuth()
     const [profile, setProfile] = useState<UserProfile | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
+        if (!user) {
+            setProfile(null)
+            setLoading(false)
+            return
+        }
+
         async function fetchProfile() {
+            if (!user) return
+
             try {
-                const { data: { user } } = await supabase.auth.getUser()
-
-                if (!user) {
-                    setLoading(false)
-                    return
-                }
-
                 const { data, error } = await supabase
                     .from('user_profiles')
                     .select('*')
-                    .eq('id', user.id)
+                    .eq('user_id', user.id)
                     .single()
 
-                if (error) {
-                    throw error
-                }
+                if (error) throw error
 
-                setProfile(data as UserProfile)
+                setProfile(data)
             } catch (err: any) {
                 setError(err.message)
             } finally {
@@ -46,7 +47,27 @@ export function useProfile() {
         }
 
         fetchProfile()
-    }, [])
+    }, [user])
 
-    return { profile, loading, error }
+    const updateProfile = async (updates: Partial<UserProfile>) => {
+        if (!user) return { error: 'No user logged in' }
+
+        try {
+            const { error } = await supabase
+                .from('user_profiles')
+                .update(updates)
+                .eq('user_id', user.id)
+
+            if (error) throw error
+
+            // Update local state
+            setProfile((prev) => prev ? { ...prev, ...updates } : null)
+
+            return { error: null }
+        } catch (err: any) {
+            return { error: err.message }
+        }
+    }
+
+    return { profile, loading, error, updateProfile }
 }

@@ -9,8 +9,9 @@ import { useTranslation } from "react-i18next"
 
 export default function ProfilePage() {
     const { t } = useTranslation()
-    const { profile, loading, error } = useProfile()
+    const { profile, loading, error, updateProfile } = useProfile()
     const [isEditing, setIsEditing] = useState(false)
+    const [saving, setSaving] = useState(false)
 
     const [formData, setFormData] = useState({
         full_name: "",
@@ -30,6 +31,16 @@ export default function ProfilePage() {
             })
         }
     })
+
+    const handleSave = async () => {
+        setSaving(true)
+        const { error } = await updateProfile(formData)
+        setSaving(false)
+
+        if (!error) {
+            setIsEditing(false)
+        }
+    }
 
     if (loading) {
         return (
@@ -70,12 +81,20 @@ export default function ProfilePage() {
                                 Your account and profile information
                             </CardDescription>
                         </div>
-                        <Button
-                            variant={isEditing ? "default" : "outline"}
-                            onClick={() => setIsEditing(!isEditing)}
-                        >
-                            {isEditing ? t('profile.save') : t('profile.edit')}
-                        </Button>
+                        {isEditing ? (
+                            <div className="flex gap-2">
+                                <Button variant="outline" onClick={() => setIsEditing(false)} disabled={saving}>
+                                    Cancel
+                                </Button>
+                                <Button onClick={handleSave} disabled={saving}>
+                                    {saving ? "Saving..." : t('profile.save')}
+                                </Button>
+                            </div>
+                        ) : (
+                            <Button variant="outline" onClick={() => setIsEditing(true)}>
+                                {t('profile.edit')}
+                            </Button>
+                        )}
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid gap-4 md:grid-cols-2">
