@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { Notifications } from "./Notifications"
 import { LanguageToggle } from "./LanguageToggle"
 import { useAuth } from "@/contexts/AuthContext"
 import { Button } from "@/components/ui/button"
@@ -22,6 +23,9 @@ export default function Layout() {
                         <a href="/zakat" className="text-sm font-medium hover:text-primary">{t('app.nav.zakat')}</a>
                         <a href="/audit" className="text-sm font-medium hover:text-primary">{t('app.nav.audit')}</a>
 
+                        <Notifications />
+                        <LanguageToggle />
+
                         {user ? (
                             <>
                                 <a href="/profile" className="text-sm font-medium hover:text-primary flex items-center gap-1">
@@ -36,8 +40,6 @@ export default function Layout() {
                         ) : (
                             <a href="/login" className="text-sm font-medium hover:text-primary">{t('auth.login')}</a>
                         )}
-
-                        <LanguageToggle />
                     </nav>
                 </div>
             </header>
