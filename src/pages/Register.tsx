@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import { UserRegisterForm } from "@/components/auth/user-register-form"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft } from "lucide-react"
 
 export default function RegisterPage() {
     return (
@@ -20,6 +22,12 @@ export default function RegisterPage() {
             </div>
             <div className="lg:p-8">
                 <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+                    <Link to="/">
+                        <Button variant="ghost" size="sm" className="gap-2 mb-4">
+                            <ArrowLeft className="h-4 w-4" />
+                            Back to Home
+                        </Button>
+                    </Link>
                     <div className="flex flex-col space-y-2 text-center">
                         <h1 className="text-2xl font-semibold tracking-tight">
                             Create an account
