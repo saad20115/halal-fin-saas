@@ -12,6 +12,14 @@
         },
         "footer": "© 2026 HalalFin. Shariah Compliant."
     },
+    "common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "success": "Success",
+        "pleaseLogin": "Please login first",
+        "submitting": "Submitting...",
+        "months": "months"
+    },
     "home": {
         "hero": {
             "badge": "100% Shariah Compliant",
@@ -87,6 +95,32 @@
     "financing": {
         "title": "Halal Financing Solutions",
         "subtitle": "Compare offers from top Islamic banks in seconds.",
+        "applyNow": "Apply for Financing",
+        "applyDescription": "Fill out the form to submit your financing request",
+        "productType": "Product Type",
+        "assetValue": "Asset Value (SAR)",
+        "downPayment": "Down Payment (SAR)",
+        "duration": "Duration (Months)",
+        "financingAmount": "Financing Amount",
+        "estimatedMonthly": "Estimated Monthly",
+        "requestSubmitted": "Your request has been submitted successfully!",
+        "submitRequest": "Submit Request",
+        "monthlyPayment": "Monthly Payment",
+        "noRequests": "You have no financing requests yet",
+        "myRequests": "My Financing Requests",
+        "requestsDescription": "Track the status of your financing applications",
+        "types": {
+            "auto": "Auto Financing",
+            "realEstate": "Real Estate",
+            "personal": "Personal",
+            "business": "Business"
+        },
+        "status": {
+            "pending": "Pending",
+            "approved": "Approved",
+            "rejected": "Rejected",
+            "moreInfo": "More Info Needed"
+        },
         "calculator": {
             "title": "Calculator Inputs",
             "description": "Adjust values to see offers.",
@@ -151,7 +185,10 @@
             "debts": "Short-term Debts (Deductible)",
             "total_due": "Total Zakat Due (2.5%)",
             "net_assets": "Total Net Assets",
-            "pay_now": "Pay Zakat Now"
+            "pay_now": "Pay Zakat Now",
+            "calculate": "Calculate Zakat",
+            "result_title": "Zakat Due",
+            "result_description": "Based on entered assets"
         },
         "history": {
             "title": "Recent Charity Transactions",
@@ -170,10 +207,12 @@
             "description": "Analyze any stock or company for Shariah compliance instantly.",
             "placeholder": "Enter Stock Symbol (e.g. 2222.SR)",
             "analyze": "Analyze",
+            "check": "Check Now",
             "compliance_score": "Compliance Score",
             "compliant": "Compliant",
             "non_compliant": "Non-Compliant",
-            "doubtful": "Doubtful"
+            "doubtful": "Doubtful",
+            "analysis": "Analysis"
         },
         "logs": {
             "title": "Immutable Audit Logs",
@@ -181,7 +220,9 @@
             "action": "Action",
             "entity": "Entity",
             "user": "User / System",
-            "timestamp": "Timestamp"
+            "timestamp": "Timestamp",
+            "recent": "Recent Activity",
+            "no_logs": "No audit logs yet"
         }
     },
     "profile": {

@@ -12,6 +12,14 @@
         },
         "footer": "© 2026 حلال فين. متوافق مع الشريعة الإسلامية."
     },
+    "common": {
+        "loading": "جاري التحميل...",
+        "error": "حدث خطأ ما",
+        "success": "تم بنجاح",
+        "pleaseLogin": "يرجى تسجيل الدخول أولاً",
+        "submitting": "جاري الإرسال...",
+        "months": "شهور"
+    },
     "home": {
         "hero": {
             "badge": "متوافق 100% مع الشريعة الإسلامية",
@@ -87,6 +95,32 @@
     "financing": {
         "title": "حلول التمويل الحلال",
         "subtitle": "قارن عروض أفضل البنوك الإسلامية في ثوانٍ.",
+        "applyNow": "تقديم طلب تمويل",
+        "applyDescription": "املأ النموذج لتقديم طلب التمويل الخاص بك",
+        "productType": "نوع التمويل",
+        "assetValue": "قيمة الأصل (ر.س)",
+        "downPayment": "الدفعة الأولى (ر.س)",
+        "duration": "المدة (شهور)",
+        "financingAmount": "مبلغ التمويل",
+        "estimatedMonthly": "القسط المقدر",
+        "requestSubmitted": "تم إرسال طلبك بنجاح!",
+        "submitRequest": "إرسال الطلب",
+        "monthlyPayment": "القسط الشهري",
+        "noRequests": "لا توجد طلبات تمويل حتى الآن",
+        "myRequests": "طلباتي",
+        "requestsDescription": "تتبع حالة طلبات التمويل الخاصة بك",
+        "types": {
+            "auto": "تمويل سيارات",
+            "realEstate": "تمويل عقاري",
+            "personal": "تمويل شخصي",
+            "business": "تمويل أعمال"
+        },
+        "status": {
+            "pending": "قيد المراجعة",
+            "approved": "تمت الموافقة",
+            "rejected": "مرفوض",
+            "moreInfo": "مطلوب معلومات إضافية"
+        },
         "calculator": {
             "title": "مدخلات الحاسبة",
             "description": "عدل القيم لرؤية العروض.",
@@ -100,7 +134,6 @@
             "monthly": "القسط الشهري",
             "apply": "قدم الآن"
         },
-        "request_form_title": "نموذج طلب التمويل",
         "tabs": {
             "calculator": "الحاسبة",
             "apply": "تقديم طلب",
@@ -118,15 +151,26 @@
             "invested_assets": "الأصول المستثمرة",
             "zakat_due": "الزكاة المستحقة",
             "from_last_month": "من الشهر الماضي",
-            "chart_title": "أداء المحفظة (12 شهر)"
+            "annual_return": "العائد السنوي",
+            "types": "صكوك، صناديق، أسهم",
+            "calculated_on": "محسوبة على 2.5%"
+        },
+        "chart": {
+            "title": "نظرة عامة على الأداء",
+            "subtitle": "نمو محفظتك خلال الـ 6 أشهر الماضية."
         },
         "sukuk_marketplace": {
             "title": "سوق الصكوك",
-            "issuer": "الجهة المصدرة",
-            "maturity": "تاريخ الاستحقاق",
+            "view_all": "عرض الكل",
+            "low_risk": "مخاطر منخفضة",
+            "medium_risk": "مخاطر متوسطة",
+            "rating": "التصنيف",
+            "duration": "المدة",
             "min_investment": "الحد الأدنى",
-            "invest": "استثمر"
-        }
+            "invest_now": "استثمر الآن",
+            "yield": "العائد"
+        },
+        "coming_soon": "وحدة الصناديق الاستثمارية الحلال (قريباً)"
     },
     "zakat": {
         "title": "الزكاة والصدقات",
@@ -134,20 +178,25 @@
         "calculator": {
             "title": "حاسبة الزكاة",
             "description": "أدخل أصولك لحساب الزكاة.",
-            "cash": "نقد وودائع (ر.س)",
-            "gold": "ذهب (جرام)",
-            "silver": "فضة (جرام)",
-            "investments": "استثمارات (ر.س)",
+            "cash": "نقد ورصيد بنكي (ر.س)",
+            "gold": "ذهب ومجوهرات (قيمة ر.س)",
+            "silver": "فضة (قيمة ر.س)",
+            "stocks": "أسهم واستثمارات (ر.س)",
+            "debts": "ديون قصيرة الأجل (تخصم)",
+            "total_due": "إجمالي الزكاة المستحقة (2.5%)",
+            "net_assets": "صافي الأصول",
+            "pay_now": "ادفع الزكاة الآن",
             "calculate": "احسب الزكاة",
             "result_title": "الزكاة المستحقة",
             "result_description": "بناءً على الأصول المدخلة"
         },
         "history": {
-            "title": "سجل الزكاة",
-            "date": "التاريخ",
-            "amount": "المبلغ",
-            "status": "الحالة",
-            "no_records": "لا توجد سجلات بعد"
+            "title": "سجل الزكاة والصدقات",
+            "header": "السجل",
+            "zakat_payment": "دفع زكاة",
+            "sadaqah": "صدقة",
+            "orphan": "كفالة يتيم",
+            "verified": "موثق"
         }
     },
     "audit": {
@@ -155,15 +204,23 @@
         "subtitle": "تحقق من توافق معاملاتك مع الشريعة.",
         "checker": {
             "title": "فاحص الشريعة بالذكاء الاصطناعي",
-            "description": "أدخل اسم الشركة أو رمز السهم.",
-            "placeholder": "مثال: AAPL, Google, Tesla",
+            "description": "حلل أي سهم أو شركة للامتثال الشرعي فوراً.",
+            "placeholder": "أدخل رمز السهم (مثال: 2222.SR)",
             "check": "تحقق الآن",
+            "analyze": "تحليل",
+            "compliance_score": "درجة الامتثال",
             "compliant": "متوافق مع الشريعة",
-            "not_compliant": "غير متوافق",
+            "non_compliant": "غير متوافق",
+            "doubtful": "مشكوك فيه",
             "analysis": "التحليل"
         },
         "logs": {
             "title": "سجلات التدقيق",
+            "caption": "قائمة بأحدث الإجراءات القابلة للتدقيق على المنصة.",
+            "action": "الإجراء",
+            "entity": "الكيان",
+            "user": "المستخدم / النظام",
+            "timestamp": "الوقت",
             "recent": "العمليات الأخيرة",
             "no_logs": "لا توجد سجلات تدقيق بعد"
         }
@@ -176,31 +233,16 @@
         "phone": "رقم الهاتف",
         "nationality": "الجنسية",
         "risk_profile": "ملف المخاطرة",
-        "edit": "تعديل",
-        "save": "حفظ",
+        "edit": "تعديل الملف",
+        "save": "حفظ التغييرات",
         "loading": "جاري التحميل..."
     },
     "dashboard": {
         "title": "لوحة التحكم",
         "welcome": "مرحباً",
-        "overview": {
-            "title": "نظرة عامة",
-            "total_balance": "إجمالي الرصيد",
-            "profit": "الأرباح",
-            "zakat_due": "الزكاة المستحقة",
-            "contracts": "عقود التمويل"
-        },
-        "quick_actions": {
-            "title": "إجراءات سريعة",
-            "apply_financing": "قدم طلب تمويل",
-            "invest": "استثمر الآن",
-            "calculate_zakat": "احسب الزكاة",
-            "check_compliance": "تحقق من التوافق"
-        },
-        "recent_activity": {
-            "title": "النشاط الأخير",
-            "no_activity": "لا يوجد نشاط حديث"
-        }
+        "overview": "نظرة عامة سريعة",
+        "recent_activity": "النشاط الأخير",
+        "quick_actions": "إجراءات سريعة"
     },
     "auth": {
         "login": "تسجيل الدخول",
@@ -211,6 +253,10 @@
         "full_name": "الاسم الكامل",
         "login_button": "دخول",
         "register_button": "تسجيل",
+        "no_account": "ليس لديك حساب؟",
+        "have_account": "لديك حساب بالفعل؟",
+        "sign_up": "اشترك",
+        "sign_in": "سجل دخول",
         "back_to_home": "العودة للرئيسية"
     }
 }

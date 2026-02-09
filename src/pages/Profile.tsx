@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -40,8 +40,7 @@ export default function ProfilePage() {
         risk_profile: ""
     })
 
-    // Update form data when profile loads
-    useEffect(() => {
+    const startEditing = () => {
         if (profile) {
             setFormData({
                 full_name: profile.full_name || "",
@@ -50,7 +49,8 @@ export default function ProfilePage() {
                 risk_profile: profile.risk_profile || ""
             })
         }
-    }, [profile])
+        setIsEditing(true)
+    }
 
     const handleSave = async () => {
         setSaving(true)
@@ -183,7 +183,7 @@ export default function ProfilePage() {
                                     <Button
                                         variant="outline"
                                         size="sm"
-                                        onClick={() => setIsEditing(true)}
+                                        onClick={startEditing}
                                         className="gap-2"
                                     >
                                         <Edit2 className="h-4 w-4" />
@@ -408,7 +408,7 @@ export default function ProfilePage() {
                                     ].map((activity, index) => (
                                         <div key={index} className="flex items-center gap-4 p-4 rounded-lg border-2 hover:bg-muted/50 transition-colors">
                                             <div className={`h-10 w-10 rounded-full flex items-center justify-center ${activity.type === 'update' ? 'bg-blue-100 dark:bg-blue-950' :
-                                                    'bg-amber-100 dark:bg-amber-950'
+                                                'bg-amber-100 dark:bg-amber-950'
                                                 }`}>
                                                 {activity.type === 'update' ? (
                                                     <Settings className="h-5 w-5 text-blue-600" />
