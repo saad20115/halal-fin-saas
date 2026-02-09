@@ -126,14 +126,14 @@ export default function HomePage() {
             <section className="relative py-20 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-black/10" />
                 <div className="container relative px-4">
-                    <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+                    <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
                         {stats.map((stat, index) => (
                             <div
                                 key={index}
                                 className="text-center transform transition-all duration-300 hover:scale-110 animate-fade-in"
                                 style={{ animationDelay: `${index * 100}ms` }}
                             >
-                                <div className="text-4xl md:text-5xl font-bold mb-2 drop-shadow-lg">
+                                <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2 drop-shadow-lg">
                                     {stat.value}
                                 </div>
                                 <div className="text-sm md:text-base text-white/90 font-medium">
@@ -157,7 +157,7 @@ export default function HomePage() {
                         </p>
                     </div>
 
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         {features.map((feature, index) => (
                             <Card
                                 key={index}
@@ -167,13 +167,13 @@ export default function HomePage() {
                                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
                                 <CardHeader className="relative">
-                                    <div className={`mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.gradient} shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                                        <feature.icon className="h-8 w-8 text-white" />
+                                    <div className={`mb-3 sm:mb-4 inline-flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.gradient} shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                                        <feature.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                                     </div>
-                                    <CardTitle className="text-2xl group-hover:text-violet-600 transition-colors duration-300">
+                                    <CardTitle className="text-lg sm:text-xl md:text-2xl group-hover:text-violet-600 transition-colors duration-300">
                                         {feature.title}
                                     </CardTitle>
-                                    <CardDescription className="text-base">
+                                    <CardDescription className="text-sm sm:text-base">
                                         {feature.description}
                                     </CardDescription>
                                 </CardHeader>
@@ -197,7 +197,7 @@ export default function HomePage() {
                         </p>
                     </div>
 
-                    <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-3">
+                    <div className="mx-auto grid max-w-5xl gap-8 sm:gap-12 md:grid-cols-3 px-4">
                         {steps.map((step, index) => (
                             <div
                                 key={index}
@@ -208,7 +208,7 @@ export default function HomePage() {
                                     <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-3xl font-bold text-white shadow-2xl shadow-violet-500/50 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
                                         {step.number}
                                     </div>
-                                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-violet-600 transition-colors">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-violet-600 transition-colors">
                                         {step.title}
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -232,7 +232,7 @@ export default function HomePage() {
                             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
                                 {t('home.benefits.title')}
                             </h2>
-                            <div className="space-y-4">
+                            <div className="space-y-3 sm:space-y-4">
                                 {[
                                     t('home.benefits.benefit1'),
                                     t('home.benefits.benefit2'),
@@ -252,10 +252,10 @@ export default function HomePage() {
                             </div>
                         </div>
 
-                        <Card className="relative overflow-hidden border-2 border-violet-200 dark:border-violet-800 shadow-2xl shadow-violet-500/20 animate-slide-left">
+                        <Card className="relative overflow-hidden border-2 border-violet-200 dark:border-violet-800 shadow-2xl shadow-violet-500/20 animate-slide-left mx-4 lg:mx-0">
                             <div className="absolute inset-0 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:from-violet-950/30 dark:to-fuchsia-950/30" />
                             <CardHeader className="relative">
-                                <CardTitle className="flex items-center gap-3 text-2xl">
+                                <CardTitle className="flex items-center gap-2 sm:gap-3 text-xl sm:text-2xl">
                                     <div className="p-3 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 shadow-lg">
                                         <Shield className="h-6 w-6 text-white" />
                                     </div>
@@ -266,7 +266,7 @@ export default function HomePage() {
                                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                                     {t('home.trust.description')}
                                 </p>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     <div className="group rounded-xl border-2 border-violet-200 dark:border-violet-800 bg-white dark:bg-gray-800 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                                         <Wallet className="mb-3 h-10 w-10 text-violet-600 group-hover:scale-110 transition-transform" />
                                         <p className="font-semibold text-gray-900 dark:text-white">{t('home.trust.certified')}</p>
@@ -291,7 +291,7 @@ export default function HomePage() {
                     <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                         {t('home.cta.title')}
                     </h2>
-                    <p className="text-xl text-white/90 max-w-2xl mx-auto animate-fade-in animation-delay-200">
+                    <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto animate-fade-in animation-delay-200 px-4">
                         {t('home.cta.subtitle')}
                     </p>
                     <Button
