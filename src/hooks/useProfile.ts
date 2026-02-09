@@ -30,16 +30,40 @@ export function useProfile() {
             if (!user) return
 
             try {
-                const { data, error } = await supabase
+                // Try to fetch existing profile
+                const { data, error: fetchError } = await supabase
                     .from('user_profiles')
                     .select('*')
-                    .eq('user_id', user.id)
-                    .single()
+                    .eq('id', user.id)
+                    .maybeSingle() // Use maybeSingle() instead of single()
 
-                if (error) throw error
+                if (fetchError) throw fetchError
 
-                setProfile(data)
+                // If profile doesn't exist, create it
+                if (!data) {
+                    const newProfile = {
+                        id: user.id,
+                        email: user.email || '',
+                        full_name: user.user_metadata?.full_name || '',
+                        phone: '',
+                        nationality: '',
+                        risk_profile: ''
+                    }
+
+                    const { data: createdProfile, error: createError } = await supabase
+                        .from('user_profiles')
+                        .insert([newProfile])
+                        .select()
+                        .single()
+
+                    if (createError) throw createError
+
+                    setProfile(createdProfile)
+                } else {
+                    setProfile(data)
+                }
             } catch (err: any) {
+                console.error('Profile fetch/create error:', err)
                 setError(err.message)
             } finally {
                 setLoading(false)
@@ -56,7 +80,7 @@ export function useProfile() {
             const { error } = await supabase
                 .from('user_profiles')
                 .update(updates)
-                .eq('user_id', user.id)
+                .eq('id', user.id)
 
             if (error) throw error
 

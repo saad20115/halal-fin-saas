@@ -109,6 +109,10 @@ create policy "Users can view own profile" on public.user_profiles
 create policy "Users can update own profile" on public.user_profiles
   for update using (auth.uid() = id);
 
+-- Users can insert their own profile
+create policy "Users can insert own profile" on public.user_profiles
+  for insert with check (auth.uid() = id);
+
 -- Public read access to active banks and products
 create policy "Public read banks" on public.banks
   for select using (is_active = true);
