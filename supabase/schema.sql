@@ -63,6 +63,21 @@ create table public.investment_portfolios (
   portfolio_type text check (portfolio_type in ('stocks', 'etfs', 'sukuk', 'mixed')),
   risk_level text check (risk_level in ('low', 'medium', 'high')),
   total_value numeric default 0,
+  total_profit numeric default 0,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Sukuk Products (Marketplace)
+create table public.sukuk_products (
+  id uuid default uuid_generate_v4() primary key,
+  issuer text not null,
+  name text not null,
+  sukuk_rating text,
+  annual_yield numeric not null,
+  duration_months integer,
+  min_investment numeric default 1000,
+  risk_level text check (risk_level in ('low', 'medium', 'high')),
+  is_active boolean default true,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
@@ -97,6 +112,7 @@ alter table public.banks enable row level security;
 alter table public.financial_products enable row level security;
 alter table public.financing_requests enable row level security;
 alter table public.investment_portfolios enable row level security;
+alter table public.sukuk_products enable row level security;
 alter table public.zakat_records enable row level security;
 alter table public.audit_logs enable row level security;
 
@@ -113,11 +129,14 @@ create policy "Users can update own profile" on public.user_profiles
 create policy "Users can insert own profile" on public.user_profiles
   for insert with check (auth.uid() = id);
 
--- Public read access to active banks and products
+-- Public read access to active banks, products, and sukuk
 create policy "Public read banks" on public.banks
   for select using (is_active = true);
 
 create policy "Public read products" on public.financial_products
+  for select using (is_active = true);
+
+create policy "Public read sukuk" on public.sukuk_products
   for select using (is_active = true);
 
 -- Users can See their own financing requests
@@ -126,4 +145,12 @@ create policy "Users see own requests" on public.financing_requests
 
 -- Users can Create financing requests
 create policy "Users create requests" on public.financing_requests
+  for insert with check (auth.uid() = user_id);
+
+-- Users can See their own portfolios
+create policy "Users see own portfolios" on public.investment_portfolios
+  for select using (auth.uid() = user_id);
+
+-- Users can Create portfolios
+create policy "Users create portfolios" on public.investment_portfolios
   for insert with check (auth.uid() = user_id);
