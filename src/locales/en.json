@@ -14,10 +14,74 @@
     },
     "home": {
         "hero": {
-            "title": "Halal Financial Operating System",
-            "subtitle": "Your trusted platform for Shariah-compliant financing, investing, and Zakat management.",
-            "get_started": "Get Started",
-            "learn_more": "Learn More"
+            "badge": "100% Shariah Compliant",
+            "title": "Your Halal Financial Operating System",
+            "subtitle": "Manage all your Islamic finance needs in one secure platform. From financing to investments, Zakat to Shariah audit.",
+            "cta_primary": "Start Free Today",
+            "cta_secondary": "Explore Features"
+        },
+        "stats": {
+            "compliant": "Shariah Compliant",
+            "users": "Active Users",
+            "products": "Financial Products",
+            "support": "Support"
+        },
+        "features_section": {
+            "title": "Everything You Need for Halal Finance",
+            "subtitle": "Comprehensive tools designed to simplify your Islamic financial journey"
+        },
+        "features": {
+            " financing": {
+                "title": "Halal Financing",
+                "desc": "Compare and apply for Shariah-compliant financing from top Islamic banks"
+            },
+            "investment": {
+                "title": "Smart Investments",
+                "desc": "Invest in Sukuk, halal stocks, and certified Islamic funds"
+            },
+            "zakat": {
+                "title": "Zakat Calculator",
+                "desc": "Accurately calculate and track your Zakat obligations"
+            },
+            "audit": {
+                "title": "Shariah Audit",
+                "desc": "AI-powered compliance checking for all your transactions"
+            }
+        },
+        "how_it_works": {
+            "title": "How It Works",
+            "subtitle": "Get started in three simple steps",
+            "step1": {
+                "title": "Create Your Account",
+                "desc": "Sign up in minutes with secure authentication and profile setup"
+            },
+            "step2": {
+                "title": "Choose Your Service",
+                "desc": "Select from financing, investments, Zakat, or compliance audit"
+            },
+            "step3": {
+                "title": "Start Managing",
+                "desc": "Track everything in your dashboard with real-time updates"
+            }
+        },
+        "benefits": {
+            "title": "Why Choose HalalFin?",
+            "benefit1": "100% Shariah-compliant products certified by renowned scholars",
+            "benefit2": "Real-time portfolio tracking and performance analytics",
+            "benefit3": "Automated Zakat calculation with historical records",
+            "benefit4": "AI-powered transaction screening for compliance",
+            "benefit5": "Secure and encrypted data with bank-level security"
+        },
+        "trust": {
+            "title": "Trusted & Certified",
+            "description": "Our platform is audited by leading Shariah boards and complies with all Islamic finance standards.",
+            "certified": "Shariah Certified",
+            "trusted": "Trusted by 1M+ Users"
+        },
+        "cta": {
+            "title": "Ready to Start Your Halal Finance Journey?",
+            "subtitle": "Join thousands of users managing their Islamic finances with confidence",
+            "button": "Create Free Account"
         }
     },
     "financing": {
